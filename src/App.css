@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font);
+}
+
+:root {
+  --font: 'Montserrat', sans-serif;
+  --accent: #da2535;
+  --black: #292929;
+  --fade: #727272;
+  --white: #fbfbfb;
+}
+
+img {
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  padding: 0 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-direction: column;
+}
+
+.main-header {
+  font-size: 4rem;
+  font-weight: 900;
+  color: var(--accent);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* SEARCH BAR CONTAINER */
+.search-local {
+  width: 100%;
+  max-width: 75rem;
+  display: flex;
+  align-items: center;
+  column-gap: 2rem;
+  padding-left: 2rem;
+  background: var(--white);
+  border-radius: 1rem;
+  min-height: 7rem;
+  height: auto;
+  border: 0.1rem solid var(--black);
+  border-right: none;
+}
+
+/* ICON */
+.icon {
+  color: var(--accent);
+  font-size: 3.5rem;
+  display: flex;
+  align-items: center;
+}
+
+/* INPUT */
+.search-local input {
+  height: 100%;
+  width: 100%;
+  flex: 1 1 25rem;
+  background: var(--white);
+  display: flex;
+  outline: none;
+  border: none;
+  color: var(--black);
+  font-size: 2rem;
+}
+
+input[type='text']::placeholder {
+  color: var(--fade);
+}
+
+/* BUTTON */
+.search-local button {
+  background: var(--accent);
+  border: none;
+  border-radius: 0 1rem 1rem 0;
+  font-weight: 500;
+  font-size: 2rem;
+  height: 7rem;
+  width: 18rem;
+  cursor: pointer;
+  text-align: center;
+}
+
+button .search-title {
+  color: var(--white);
+  transition: all 0.5s;
+}
+
+.search-local button .search-icon {
+  display: none;
+  scale: 0;
+}
+
+.search-local button:hover .search-title {
+  letter-spacing: 0.3rem;
+}
+
+/* MEDIAS */
+@media (max-width: 575px) {
+  .search-local {
+    padding-left: 0;
+    column-gap: 0.25rem;
+  }
+
+  .search-local button {
+    width: 10rem;
+  }
+
+  button .search-title {
+    display: none;
+  }
+
+  .search-local button .search-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-inline: auto;
+    color: var(--white);
+    font-size: 2rem;
+    scale: 1;
+  }
+}
+
+.left-header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: end;
+  width: 100%;
+}
+
+.left-header div {
+  font-size: 1.25rem;
+}
+
+/* INPUT */
+.small-input {
+  display: flex;
+  text-align: end;
+  outline: none;
+  border: none;
+  color: #000;
+  font-weight: 600;
+  font-size: 1.5rem;
+  border-radius: 8px;
+}
+
+.small-input[type='text']::placeholder {
+  color: var(--fade);
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-container {
+  padding: 20px 250px;
+}
+
+.search-title-small {
+  background-color: var(--accent);
+  color: var(--white);
+  border-radius: 8px;
+  font-size: 1.25rem;
+  padding: 10px 30px;
+  width: auto;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+@media (max-width: 1000px) {
+  .main-container {
+    padding: 15px 150px;
+  }
+}
+
+@media (max-width: 768px) {
+  .search-title-small {
+    text-align: center;
+  }
+
+  .small-input {
+    text-align: center;
+  }
+
+  .left-header {
+    text-align: center;
+    margin-top: 25px;
+  }
+
+  .wrapper {
+    flex-direction: column;
+  }
+  .main-container {
+    padding: 10px 15px;
+  }
+
+  .title-wear {
+    font-size: 1rem !important;
+  }
+}
+
+.input[type='checkbox'] {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+  display: none;
+}
+
+label {
+  cursor: pointer;
+  text-indent: -9999px;
+  width: 100px;
+  height: 60px;
+  background: #b85887;
+  display: block;
+  border-radius: 100px;
+  position: relative;
+}
+
+label:after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 50px;
+  height: 50px;
+  background: #fff;
+  border-radius: 90px;
+  transition: 0.3s;
+}
+
+.input:checked + label {
+  background: #2589da;
+}
+
+.input:checked + label:after {
+  left: calc(100% - 5px);
+  transform: translateX(-100%);
+}
+
+label:active:after {
+  width: 60px;
+}
