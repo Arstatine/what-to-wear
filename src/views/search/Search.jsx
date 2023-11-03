@@ -32,6 +32,7 @@ const Search = () => {
     try {
       if (text == '') return;
 
+      setTemperature('');
       setSearchParams({ q: text });
 
       const response = await axios.get(
@@ -55,6 +56,7 @@ const Search = () => {
   useEffect(() => {
     const fetch = async () => {
       try {
+        setTemperature('');
         const response = await axios.get(
           `/v1/current.json?q=${
             searchParams?.get('q') === '' ? 'auto:ip' : searchParams?.get('q')
