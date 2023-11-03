@@ -19,12 +19,16 @@ const TopSlider = ({ temperature, gender }) => {
             animation='slide'
             autoPlay={false}
             navButtonsAlwaysVisible={true}
-            style={{ height: '100%' }}
+            style={{ height: 'auto' }}
           >
             {filteredTop.map((t) => {
               return (
                 <div key={t.id} className='card'>
-                  <img src={t.link} alt={t.name} />
+                  <img
+                    src={t.link}
+                    alt={t.name}
+                    style={{ height: '100%', width: 'auto' }}
+                  />
                   <div
                     style={{
                       color: '#292929',

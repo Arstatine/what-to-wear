@@ -19,12 +19,16 @@ const OuterSlider = ({ temperature, gender }) => {
             animation='slide'
             autoPlay={false}
             navButtonsAlwaysVisible={true}
-            style={{ height: '100%' }}
+            style={{ height: 'auto' }}
           >
             {filteredOuterwear.map((outer) => {
               return (
                 <div key={outer.id} className='card'>
-                  <img src={outer.link} alt={outer.name} />
+                  <img
+                    src={outer.link}
+                    alt={outer.name}
+                    style={{ height: '100%', width: 'auto' }}
+                  />
                   <div
                     style={{
                       color: '#292929',

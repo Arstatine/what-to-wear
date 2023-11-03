@@ -19,12 +19,16 @@ const BottomSlider = ({ temperature, gender }) => {
             animation='slide'
             autoPlay={false}
             navButtonsAlwaysVisible={true}
-            style={{ height: '100%' }}
+            style={{ height: 'auto' }}
           >
             {filteredBottom.map((bot) => {
               return (
                 <div key={bot.id} className='card'>
-                  <img src={bot.link} alt={bot.name} />
+                  <img
+                    src={bot.link}
+                    alt={bot.name}
+                    style={{ height: '100%', width: 'auto' }}
+                  />
                   <div
                     style={{
                       color: '#292929',

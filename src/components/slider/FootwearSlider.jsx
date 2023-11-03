@@ -19,12 +19,16 @@ const FootwearSlider = ({ temperature, gender }) => {
             animation='slide'
             autoPlay={false}
             navButtonsAlwaysVisible={true}
-            style={{ height: '100%' }}
+            style={{ height: 'auto' }}
           >
             {filteredFootwear.map((foot) => {
               return (
                 <div key={foot.id} className='card'>
-                  <img src={foot.link} alt={foot.name} />
+                  <img
+                    src={foot.link}
+                    alt={foot.name}
+                    style={{ height: '100%', width: 'auto' }}
+                  />
                   <div
                     style={{
                       color: '#292929',
