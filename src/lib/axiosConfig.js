@@ -1,10 +1,8 @@
 import axios from 'axios';
 
-const instance = axios.create({
-  baseURL: ' http://api.weatherapi.com',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+export const SERVER_URL = 'http://api.weatherapi.com';
 
-export default instance;
+export default axios.create({
+  baseURL: SERVER_URL,
+  withCredentials: true,
+});
