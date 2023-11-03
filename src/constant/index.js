@@ -80,7 +80,7 @@ const IMAGES = {
       link: DENIM_SHORT,
       gender: 2,
       min: 1,
-      max: 3,
+      max: 2,
     },
     {
       id: 3,
@@ -112,7 +112,7 @@ const IMAGES = {
       link: SHORTS_WOB,
       gender: 3,
       min: 1,
-      max: 3,
+      max: 2,
     },
     {
       id: 7,
@@ -268,7 +268,7 @@ const IMAGES = {
       link: DRESS,
       gender: 2,
       min: 1,
-      max: 3,
+      max: 2,
     },
     {
       id: 2,
@@ -324,7 +324,7 @@ const IMAGES = {
       link: TANK_TOP,
       gender: 2,
       min: 1,
-      max: 3,
+      max: 2,
     },
     {
       id: 9,

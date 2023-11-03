@@ -3,18 +3,22 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from '../../lib/axiosConfig';
 import { API_KEY } from '../../constant';
 import calculateLevel from '../../lib/calculateLevel';
-import FootwearSlider from '../../components/FootwearSlider';
-import BottomSlider from '../../components/BottomSlider';
-import TopSlider from '../../components/TopSlider';
-import OuterSlider from '../../components/OuterSlider';
+import FootwearSlider from '../../components/slider/FootwearSlider';
+import BottomSlider from '../../components/slider/BottomSlider';
+import TopSlider from '../../components/slider/TopSlider';
+import OuterSlider from '../../components/slider/OuterSlider';
+import SearchAddress from '../../components/form/SearchAddress';
+import ButtonRadio from '../../components/form/ButtonRadio';
+import SecondHeaderRight from '../../components/SecondHeaderRight';
+import LOGO from '../../assets/main/logo.png';
+import Footer from '../../components/Footer';
 
 const Search = () => {
   const inputRef = useRef(null);
   const navigate = useNavigate();
+  const [text, setText] = useState('');
   const [temperature, setTemperature] = useState('');
   const [data, setData] = useState('');
-  const [focus, setFocus] = useState(false);
-  const [text, setText] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
   const [gender, setGender] = useState(true);
 
@@ -22,8 +26,9 @@ const Search = () => {
   const province =
     data?.location?.region == '' ? '' : data?.location?.region + ', ';
   const country = data?.location?.country == '' ? '' : data?.location?.country;
+  const address = `${city}${province}${country}`;
 
-  const handleChangeAddress = async () => {
+  const handleAddressSearchButtonClick = async () => {
     try {
       if (text == '') return;
 
@@ -71,7 +76,7 @@ const Search = () => {
     fetch();
   }, [searchParams]);
 
-  const handleKeyPress = (e) => {
+  const handleSearchKeyPress = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
       if (text !== '') {
@@ -89,140 +94,52 @@ const Search = () => {
           style={{ cursor: 'pointer' }}
           onClick={() => navigate('/')}
         >
-          W2W
+          <img src={LOGO} alt='' style={{ width: '200px' }} />
         </div>
         <div className='left-header'>
           <div>
             {focus ? 'city, state & country' : 'set your current location'}
           </div>
-          <input
-            onFocus={() => {
-              setFocus(true);
-              setText('');
-            }}
-            ref={inputRef}
-            onBlur={() => setFocus(false)}
-            className='small-input'
-            type='text'
-            onChange={(e) => setText(e.target.value)}
-            onKeyPress={handleKeyPress}
-            value={
-              focus
-                ? text
-                : data?.location == null
-                ? ''
-                : city + province + country
-            }
+          <SearchAddress
+            inputRef={inputRef}
+            handleSearchKeyPress={handleSearchKeyPress}
+            address={address}
+            country={country}
+            text={text}
+            setText={setText}
           />
           <div>
             <button
               className='search-title-small'
-              onClick={handleChangeAddress}
+              onClick={handleAddressSearchButtonClick}
             >
               Search
             </button>
           </div>
         </div>
       </div>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginTop: '20px',
-        }}
-      >
-        <div
-          style={{
-            fontSize: gender ? '1.5rem' : '1.25rem',
-            transition: 'all 0.1s',
-            fontWeight: gender ? 900 : 600,
-            padding: '10px',
-          }}
-        >
-          Male
-        </div>
-        <div>
-          <input
-            type='checkbox'
-            id='switch'
-            className='input'
-            checked={gender}
-            onChange={(e) => setGender(e.target.checked)}
-          />
-          <label htmlFor='switch'>Toggle</label>
-        </div>
-        <div
-          style={{
-            fontSize: !gender ? '1.75rem' : '1.25rem',
-            transition: 'all 0.1s',
-            fontWeight: !gender ? 900 : 600,
-            padding: '10px',
-          }}
-        >
-          Female
-        </div>
+      <div className='second-header'>
+        <ButtonRadio gender={gender} setGender={setGender} />
+        {data?.current && <SecondHeaderRight data={data?.current} />}
       </div>
 
-      <div style={{ display: 'flex', alignItems: 'center', margin: '20px 0' }}>
-        <div
-          className='title-wear'
-          style={{
-            textAlign: 'center',
-            padding: '20px',
-            fontSize: '1.5rem',
-          }}
-        >
-          O<br />U<br />T<br />E<br />R<br />W<br />E<br />A<br />R
-        </div>
+      {temperature != '' && (
         <OuterSlider temperature={temperature} gender={gender ? 2 : 1} />
-      </div>
+      )}
 
-      <div style={{ display: 'flex', alignItems: 'center', margin: '20px 0' }}>
-        <div
-          className='title-wear'
-          style={{
-            textAlign: 'center',
-            padding: '20px',
-            fontSize: '1.5rem',
-          }}
-        >
-          T<br />O<br />P
-        </div>
+      {temperature != '' && (
         <TopSlider temperature={temperature} gender={gender ? 2 : 1} />
-      </div>
+      )}
 
-      <div style={{ display: 'flex', alignItems: 'center', margin: '20px 0' }}>
-        <div
-          className='title-wear'
-          style={{
-            textAlign: 'center',
-            padding: '20px',
-            fontSize: '1.5rem',
-          }}
-        >
-          B<br />O<br />T<br />T<br />O<br />M
-        </div>
+      {temperature != '' && (
         <BottomSlider temperature={temperature} gender={gender ? 2 : 1} />
-      </div>
+      )}
 
-      <div style={{ display: 'flex', alignItems: 'center', margin: '20px 0' }}>
-        <div
-          className='title-wear'
-          style={{
-            textAlign: 'center',
-            padding: '20px',
-            fontSize: '1.5rem',
-          }}
-        >
-          F<br />O<br />O<br />T<br />W<br />E<br />A<br />R
-        </div>
+      {temperature != '' && (
         <FootwearSlider temperature={temperature} gender={gender ? 2 : 1} />
-      </div>
+      )}
 
-      <div>Temperature: {data?.current?.temp_c}</div>
-      <div>Temperature: {temperature}</div>
-      <div>{data?.current?.condition?.text}</div>
+      <Footer />
     </div>
   );
 };

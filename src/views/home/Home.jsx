@@ -4,6 +4,7 @@ import { useState } from 'react';
 // import { API_KEY } from '../../constant';
 import { CiLocationOn } from 'react-icons/ci';
 import { BiSearchAlt2 } from 'react-icons/bi';
+import Footer from '../../components/Footer';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -49,6 +50,7 @@ const Home = () => {
           </div>
         </button>
       </div>
+      <Footer />
     </div>
   );
 };
