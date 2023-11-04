@@ -28,13 +28,31 @@ const Search = () => {
   const country = data?.location?.country == '' ? '' : data?.location?.country;
   const address = `${city}${province}${country}`;
 
-  const handleAddressSearchButtonClick = (e) => {
-    e.preventDefault();
-    if (text != '') {
-      setSearchParams({ q: text });
-    }
+  const handleAddressSearchButtonClick = async (e) => {
+    try {
+      e.preventDefault();
+      if (text != '') {
+        setSearchParams({ q: text });
+      }
 
-    setSearchParams({ q: searchParams?.get('q') });
+      setTemperature('');
+
+      const response = await axios.get(
+        `/v1/current.json?q=${
+          searchParams?.get('q') === '' ? 'auto:ip' : searchParams?.get('q')
+        }`,
+        {
+          params: { key: API_KEY },
+        }
+      );
+
+      if (response) {
+        setTemperature(calculateLevel(response?.data?.current?.temp_c));
+        return setData(response?.data);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
