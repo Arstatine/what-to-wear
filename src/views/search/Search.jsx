@@ -28,7 +28,7 @@ const Search = () => {
   const country = data?.location?.country == '' ? '' : data?.location?.country;
   const address = `${city}${province}${country}`;
 
-  const handleAddressSearchButtonClick = async (e) => {
+  const handleAddressSearchButtonClick = (e) => {
     e.preventDefault();
     if (text != '') {
       setSearchParams({ q: text });
