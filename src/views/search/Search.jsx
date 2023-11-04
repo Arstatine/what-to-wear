@@ -31,20 +31,16 @@ const Search = () => {
   const handleAddressSearchButtonClick = async (e) => {
     try {
       e.preventDefault();
-      if (text != '') {
+      if (text !== '') {
         setSearchParams({ q: text });
       }
 
       setTemperature('');
 
-      const response = await axios.get(
-        `/v1/current.json?q=${
-          searchParams?.get('q') === '' ? 'auto:ip' : searchParams?.get('q')
-        }`,
-        {
-          params: { key: API_KEY },
-        }
-      );
+      let current = searchParams?.get('q') || 'auto:ip';
+      const response = await axios.get(`/v1/current.json?q=${current}`, {
+        params: { key: API_KEY },
+      });
 
       if (response) {
         setTemperature(calculateLevel(response?.data?.current?.temp_c));
@@ -58,15 +54,11 @@ const Search = () => {
   useEffect(() => {
     const fetch = async () => {
       try {
+        let current = searchParams?.get('q') || 'auto:ip';
         setTemperature('');
-        const response = await axios.get(
-          `/v1/current.json?q=${
-            searchParams?.get('q') === '' ? 'auto:ip' : searchParams?.get('q')
-          }`,
-          {
-            params: { key: API_KEY },
-          }
-        );
+        const response = await axios.get(`/v1/current.json?q=${current}`, {
+          params: { key: API_KEY },
+        });
 
         if (response) {
           setTemperature(calculateLevel(response?.data?.current?.temp_c));
