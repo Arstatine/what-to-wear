@@ -30,10 +30,11 @@ const Search = () => {
 
   const handleAddressSearchButtonClick = async () => {
     try {
-      if (text == '') return;
+      if (text != '') {
+        setSearchParams({ q: text });
+      }
 
       setTemperature('');
-      setSearchParams({ q: text });
 
       const response = await axios.get(
         `/v1/current.json?q=${
