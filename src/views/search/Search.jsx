@@ -29,30 +29,12 @@ const Search = () => {
   const address = `${city}${province}${country}`;
 
   const handleAddressSearchButtonClick = async (e) => {
-    try {
-      e.preventDefault();
-      if (text != '') {
-        setSearchParams({ q: text });
-      }
-
-      setTemperature('');
-
-      const response = await axios.get(
-        `/v1/current.json?q=${
-          searchParams?.get('q') === '' ? 'auto:ip' : searchParams?.get('q')
-        }`,
-        {
-          params: { key: API_KEY },
-        }
-      );
-
-      if (response) {
-        setTemperature(calculateLevel(response?.data?.current?.temp_c));
-        return setData(response?.data);
-      }
-    } catch (error) {
-      console.error(error);
+    e.preventDefault();
+    if (text != '') {
+      setSearchParams({ q: text });
     }
+
+    setSearchParams({ q: searchParams?.get('q') });
   };
 
   useEffect(() => {
