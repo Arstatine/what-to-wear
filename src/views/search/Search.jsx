@@ -143,20 +143,12 @@ const Search = () => {
           margin: '50px 0',
         }}
       >
-        <div
-          style={{
-            background: '#e1515d',
-            color: '#fbfbfb',
-            width: 'auto',
-            padding: '20px 50px',
-            borderRadius: '8px',
-            fontWeight: 600,
-            cursor: 'pointer',
-          }}
+        <button
+          className='search-title-small'
           onClick={handleAddressSearchButtonClick}
         >
           Quick Fix
-        </div>
+        </button>
       </div>
 
       <Footer />

@@ -167,7 +167,7 @@ button .search-title {
 .search-title-small {
   background-color: var(--accent);
   color: var(--white);
-  border-radius: 8px;
+  border-radius: 5px;
   font-size: 1.25rem;
   padding: 10px 30px;
   width: auto;
