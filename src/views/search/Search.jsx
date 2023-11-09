@@ -135,6 +135,30 @@ const Search = () => {
         <FootwearSlider temperature={temperature} gender={gender ? 2 : 1} />
       )}
 
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          margin: '50px 0',
+        }}
+      >
+        <div
+          style={{
+            background: '#e1515d',
+            color: '#fbfbfb',
+            width: 'auto',
+            padding: '20px 50px',
+            borderRadius: '8px',
+            fontWeight: 600,
+            cursor: 'pointer',
+          }}
+          onClick={handleAddressSearchButtonClick}
+        >
+          Quick Fix
+        </div>
+      </div>
+
       <Footer />
     </div>
   );
