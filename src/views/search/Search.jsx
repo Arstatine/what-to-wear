@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from '../../lib/axiosConfig';
 import { API_KEY } from '../../constant';
 import calculateLevel from '../../lib/calculateLevel';
@@ -19,7 +19,7 @@ const Search = () => {
   const [text, setText] = useState('');
   const [temperature, setTemperature] = useState('');
   const [data, setData] = useState('');
-  const { search } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [gender, setGender] = useState(true);
 
   const city = data?.location?.name == '' ? '' : data?.location?.name + ', ';
@@ -29,49 +29,55 @@ const Search = () => {
   const address = `${city}${province}${country}`;
 
   const handleAddressSearchButtonClick = async (e) => {
-    e.preventDefault();
-    if (text !== '') {
-      inputRef.current.blur();
-      navigate(`/${text}`);
+    try {
+      e.preventDefault();
+      if (text !== '') {
+        setSearchParams({ q: text });
+      }
+
+      setTemperature('');
+
+      let current = searchParams?.get('q') || 'auto:ip';
+      const response = await axios.get(`/v1/current.json?q=${current}`, {
+        params: { key: API_KEY },
+      });
+
+      if (response) {
+        setTemperature(calculateLevel(response?.data?.current?.temp_c));
+        return setData(response?.data);
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
   useEffect(() => {
     const fetch = async () => {
       try {
-        let current = search || 'auto:ip';
+        let current = searchParams?.get('q') || 'auto:ip';
         setTemperature('');
-
         const response = await axios.get(`/v1/current.json?q=${current}`, {
           params: { key: API_KEY },
         });
 
-        if (response.data.current) {
+        if (response) {
           setTemperature(calculateLevel(response?.data?.current?.temp_c));
           return setData(response?.data);
         }
       } catch (error) {
-        setTemperature('');
-        const response = await axios.get(`/v1/current.json?q=auto:ip`, {
-          params: { key: API_KEY },
-        });
-
-        if (response.data.current) {
-          setTemperature(calculateLevel(response?.data?.current?.temp_c));
-          return setData(response?.data);
-        }
+        console.error(error);
       }
     };
 
     fetch();
-  }, [search]);
+  }, [searchParams]);
 
   const handleSearchKeyPress = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
       if (text !== '') {
         inputRef.current.blur();
-        navigate(`/${text}`);
+        setSearchParams({ q: text });
       }
     }
   };
@@ -139,7 +145,7 @@ const Search = () => {
       >
         <button
           className='search-title-small'
-          onClick={() => window.location.reload()}
+          onClick={handleAddressSearchButtonClick}
         >
           Quick Fix
         </button>

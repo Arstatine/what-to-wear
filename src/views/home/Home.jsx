@@ -14,14 +14,14 @@ const Home = () => {
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       if (text !== '') {
-        navigate(`/${text}`);
+        navigate(`/search?q=${text}`);
       }
     }
   };
 
   const handleSearch = () => {
     if (text !== '') {
-      navigate(`/${text}`);
+      navigate(`/search?q=${text}`);
     }
   };
 
