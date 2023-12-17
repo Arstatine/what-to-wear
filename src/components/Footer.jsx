@@ -4,7 +4,7 @@ const Footer = () => {
       Made by{' '}
       <a
         style={{ fontWeight: 600, color: '#e1515d' }}
-        href='https://github.com/Arstatine'
+        href='https://arstatine.github.io'
         target='_blank'
         rel='noreferrer'
       >
