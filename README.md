@@ -1,8 +1,24 @@
-# React + Vite
+# What 2 Wear
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## A web application for picking clothes based on your current location or your preferred location's weather.
 
-Currently, two official plugins are available:
+### Using [Realtime Weather API](https://www.weatherapi.com/docs/#apis-realtime) from [Weather API](https://www.weatherapi.com)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Install dependencies: <br>
+`npm install`
+
+Run development mode: <br>
+`npm run dev`
+
+## How to use?
+Visit the app [here](https://what-2-wear.vercel.app/)
+1. Enter/input the location of your choice
+2. Check the availability of outfit to weather in that place based on weather
+
+_Note:_ <br>
+- It's not necessary to pick based on the result it's just a recommendation
+- Please double check the spelling for location (ex: lapaz instead of la paz)
+- Some places maybe not included in the data of Weather API
+<br>
+
+_Made by Arstatine_
